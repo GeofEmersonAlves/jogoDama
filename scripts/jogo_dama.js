@@ -1,28 +1,25 @@
 const casaVazia='L0C0'
 const tempTranstition=0.5
-var cor1='rgb(75, 72, 72)'
-var cor2='rgb(171, 191, 188)'
-var casa_banca=cor2
-var casa_preta=cor1
+var casaBranca='rgb(171, 191, 188)'
+var casaPreta='rgb(75, 72, 72)'
+var cor1=casaPreta
+var cor2=casaBranca
 var click_casa_original=casaVazia
 var click_casa_destino=casaVazia
 var qtdePecasJogo=24
 
 document.getElementById('btnInicar').addEventListener('click',iniciarJogo)
+document.getElementById('btnGuardarPecas').addEventListener('click',guardaNaCaixa)
 
 iniciaPagina()
 
 
+function guardaNaCaixa(){
+    loopPecasParaCaixa(qtdePecasJogo,qtdePecasJogo/2)
+}
 
 function iniciarJogo(){
-    colocarPecaNoTuleiro('Preta',1,"L8C1")
-    colocarPecaNoTuleiro('Preta',2,"L8C3")
-    colocarPecaNoTuleiro('Preta',3,"L7C2")
-    colocarPecaNoTuleiro('Preta',4,"L7C4")
-    colocarPecaNoTuleiro('Branca',1,"L1C2")
-    colocarPecaNoTuleiro('Branca',2,"L1C4")
-    colocarPecaNoTuleiro('Branca',3,"L2C1")
-    colocarPecaNoTuleiro('Branca',4,"L2C3")
+    colocarPecasNoTubuleiro()
 }
 
 function iniciaPagina(){
@@ -140,25 +137,43 @@ function colocarPecaNaCaixa(corPeca,i){
         espPecasCaixa[i].style.backgroundImage=pcaGuardar
     },1000*tempTranstition*1.22)
 }
-// function colocarPecasNoTubuleiro(){
-//     var metade=qtdePecasJogo/2
-//     for(iPeca=1;iPeca<=qtdePecas;iPeca++){
-//         if(iPeca>metade){
-//             colocarPecaNoTuleiro('Branca',iPeca-metade)  
-//        }else{
-//             colocarPecaNoTuleiro('Preta',iPeca)
-//        }
-//     }
-// }
-function colocarPecaNoTuleiro(corPeca,indPeca,idCasaTabuleiro){
-    var casaTabuleiro=document.getElementById(idCasaTabuleiro)
+
+function colocarPecasNoTubuleiro(){
+    var corSelecionada=document.getElementById('corSelecinada').value
+    var corAdversario=corSelecionada=="Branca"?'Preta':'Branca'
+
+    var contPeca=qtdePecasJogo/2
+    for(lin=8;lin>=6;lin--){
+        for(col=1;col<=8;col++){
+            var idCasa = `L${lin}C${col}`
+            var casaTabuleiro=document.getElementById(idCasa)
+            if (casaTabuleiro.style.backgroundColor==casaPreta){
+                colocarPecaNoTuleiro(corSelecionada,contPeca,casaTabuleiro)
+                contPeca--
+            }
+        }
+    }
+
+    var contPeca=qtdePecasJogo/2
+    for(lin=1;lin<=3;lin++){
+        for(col=1;col<=8;col++){
+            var idCasa = `L${lin}C${col}`
+            var casaTabuleiro=document.getElementById(idCasa)
+            if (casaTabuleiro.style.backgroundColor==casaPreta){
+                colocarPecaNoTuleiro(corAdversario,contPeca,casaTabuleiro)
+                contPeca--
+            }
+        }
+    }
+}
+
+function colocarPecaNoTuleiro(corPeca,indPeca,casaTabuleiro){
     var pcaGuardar="url('images/peca" +corPeca+".png')"
     var idPeca='peca'+corPeca+''+indPeca
     var pecaDama=document.getElementById(idPeca)
     var espPecasCaixa=document.getElementsByClassName('espCaixa'+corPeca) 
-
+    
     pecaDama.style.visibility="visible"
-
     pecaDama.style.transition=""
     pecaDama.style.transitionProperty=''
     pecaDama.style.transform=''
@@ -174,10 +189,9 @@ function colocarPecaNoTuleiro(corPeca,indPeca,idCasaTabuleiro){
     pecaDama.style.transitionProperty='transform, top, left'
     pecaDama.style.left=posLeftFim+'px'
     pecaDama.style.top=posTopFim+'px'
-    pecaDama.style.transform='scale(1) rotate(3turn)'
+    pecaDama.style.transform='scale(.9) rotate(3turn)'
 
     espPecasCaixa[indPeca-1].style.backgroundImage=""
-
 }
 
 function clicar(e){
