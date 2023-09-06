@@ -1,0 +1,94 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background-image: linear-gradient(90deg,rgb(171, 191, 188), blue, rgb(171, 191, 188));
+}
+h1{
+    font-weight: bolder;
+    font-size: 4vw;
+    text-align: center;
+    color: wheat;
+    text-shadow: 5px 5px 5px rgb(255, 136, 0);
+    margin-bottom: 30px;
+}
+#areaJogo{
+    width: 100vw;
+    /* display: grid;
+    grid-template-columns: 10vw 80vw 10vw; */
+}
+.pecasBranca,.pecasPreta{
+    content: "";
+    position: absolute;
+    width: 4.5vw;
+    height: 4.5vw;
+    background-size: 100%;
+    border-radius: 45%;
+    background-repeat: no-repeat;
+    /* box-shadow: 5px 5px 5ch rgba(0, 0, 0, 0.5); */
+}
+.pecasBranca{
+    background-image: url('images/pecaBranca.png');
+    top: 88%;
+    left:1%
+}
+.pecasPreta{
+    background-image: url('images/pecaPreta.png');
+    top: 88%;
+    left: 94%;
+}
+.caixaPecas{
+    content: "";
+    position: absolute;
+    width:7%;
+    height: 30%;
+    display: grid;
+    grid-template-columns: auto auto;
+    background-image: url('images/CaixaMadeira.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    box-shadow: 15px 15px 10px rgba(23, 46, 44, 0.739);
+    padding-top: 2%;
+    padding-bottom: 1%;
+    padding-left: .5%;
+    padding-right: .5%;
+}
+#cxPcsBranca{
+    top: 15%;
+    left: 15%;  
+}
+#cxPcsPreta{
+    top: 15%;
+    left: 75%;  
+}
+#tabuleiro{
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto;
+    width: 40%;
+    height: 70vh;
+    border-style: outset;
+    border-width: 8px;
+    border-color:rgb(161, 134, 114);
+    background-image:url('images/sucupira.jpg') ;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /* border-image-source: url('images/sucupira.jpg');
+    border-image-slice:10 ; */
+    outline-style: solid;
+    outline-width: 1px;
+    outline-color: black;
+    box-shadow: 15px 15px 10px rgba(23, 46, 44, 0.739);
+}
+#formIniciarJogo{
+    width: 30vw;
+    display: block;
+    margin: auto;
+    margin-top: 1vw;
+
+}
+#btnInicar{
+    width: 8vw;
+    height: 6vh;
+}

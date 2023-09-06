@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moldura</title>
+    <style>
+		*{
+			padding: 0px;
+			margin: 0px;
+		}
+        .conteudo {
+			margin: auto;
+			width:404px;
+			height:275px;
+			border:4px solid #999;
+			background:transparent url('images/foto-sss-mini.jpg');
+			background-repeat: no-repeat;
+			background-size: cover;
+	}
+
+.moldura-dois {
+	width: 404px; 
+	border:8px inset #5f6632;
+	padding:10px;
+	background: #b1b1c3;
+	}
+
+.moldura-um {
+	width: 450px; /*404+8+8(bordas)+15+15(paddings)*/
+	border:20px inset #5d738b;
+	padding:25px;
+	background: transparent url('images/sucupira.jpg');
+	}
+    </style>
+</head>
+<body>
+    <div class="moldura-um">
+        <div class="moldura-dois">
+			<div class="conteudo"></div>
+		</div>
+    </div>
+</body>
+</html>
