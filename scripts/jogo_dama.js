@@ -85,7 +85,7 @@ function criarUmaCasaDama(linha, coluna){
     div.style.borderStyle='solid'
     div.style.borderWidth='1px'
     div.style.borderColor='black'
-    div.style.opacity='.7'
+    div.style.opacity='.65'
     div.style.backgroundColor=cor1
     div.style.textAlign='center'
     div.style.backgroundSize= '78%' //'contain' 

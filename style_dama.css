@@ -13,6 +13,20 @@ h1{
     text-shadow: 5px 5px 5px rgb(255, 136, 0);
     margin-bottom: 30px;
 }
+.underConstruction{
+    width: 10vw;
+    position: absolute;
+    opacity: 0.9;
+    z-index: 1;
+}
+#under1{
+    top: -1vh;
+    left: 1vw;
+}
+#under2{
+    top: -1vh;
+    left: 89vw;
+}
 #areaJogo{
     width: 100vw;
     /* display: grid;
