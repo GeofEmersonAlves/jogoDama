@@ -14,16 +14,7 @@ var cor2=casaBranca
 var qtdePecasJogo=24
 var casaClicadaDestino=casaVazia
 var pecaClicadaJogar=casaVazia
-//X->posição não Jogável
-//0 -Casa vazia
-var statusTabuleiro=[[NJ,JG,NJ,JG,NJ,JG,NJ,JG],
-                     [JG,NJ,JG,NJ,JG,NJ,JG,NJ],
-                     [NJ,JG,NJ,JG,NJ,JG,NJ,JG],
-                     [JG,NJ,JG,NJ,JG,NJ,JG,NJ],
-                     [NJ,JG,NJ,JG,NJ,JG,NJ,JG],
-                     [JG,NJ,JG,NJ,JG,NJ,JG,NJ],
-                     [NJ,JG,NJ,JG,NJ,JG,NJ,JG],
-                     [JG,NJ,JG,NJ,JG,NJ,JG,NJ]]
+var statusTabuleiro=[]
 
 document.getElementById('btnInicar').addEventListener('click',iniciarJogo)
 document.getElementById('btnGuardarPecas').addEventListener('click',guardaNaCaixa)
@@ -32,15 +23,19 @@ window.onresize=arrumarPecasNoTabuleiro
 iniciaPagina()
 
 
-function guardaNaCaixa(){
-    loopPecasParaCaixa(qtdePecasJogo,qtdePecasJogo/2)
-}
 
 function iniciarJogo(){
+    iniciaMatrizTabuleiro()
     colocarPecasNoTubuleiro()
 }
 
+function guardaNaCaixa(){
+    iniciaMatrizTabuleiro()
+    loopPecasParaCaixa(qtdePecasJogo,qtdePecasJogo/2)
+}
+
 function iniciaPagina(){
+    iniciaMatrizTabuleiro()
     criarCasasTabuleiro()
     criarEspacoCaixas()
     criarPecasJogo(qtdePecasJogo)
@@ -49,7 +44,7 @@ function iniciaPagina(){
 
 function criarCasasTabuleiro(){
     for (var lin=1;lin<=8; lin++){  //Linhas
-        trocar_var()        
+        trocarVarCor()        
         for(var col=1; col<=8; col++){ //colunas
             criarUmaCasaDama(lin,col)
         }
@@ -74,7 +69,7 @@ function criarUmaPecaDama(corDaPeca,indice){
 
     divPeca.id=stTab+("0"+indice).slice(-2)
     divPeca.className="pecas"+corDaPeca
-    divPeca.addEventListener('click',clicar)
+    divPeca.addEventListener('click',clickJogar)
     pagina.appendChild(divPeca)
 }
 
@@ -93,9 +88,9 @@ function criarUmaCasaDama(linha, coluna){
     div.style.backgroundPosition='center'
     
     if(cor1==casaPreta){
-        div.addEventListener('click',clicar)
+        div.addEventListener('click',clickJogar)
     }
-    trocar_var()    
+    trocarVarCor()    
     var tabuleiro = document.getElementById("tabuleiro")
     tabuleiro.appendChild(div)
 }
@@ -223,10 +218,10 @@ function colocarPecaNoTuleiro(corPeca,indPeca,casaTabuleiro){
     pecaDama.style.transform='scale(.9) rotate(3turn)'
 
     espPecasCaixa[indPeca-1].style.backgroundImage=""
-    casaTabuleiro.removeEventListener('click',clicar)
+    casaTabuleiro.removeEventListener('click',clickJogar)
 }
 
-function clicar(e){
+function clickJogar(e){
     var casaClicada=e.target
        
     if(casaClicada.id.substring(0,1)=='L' && pecaClicadaJogar!=casaVazia){
@@ -266,7 +261,7 @@ function moverPeca(idPecaClicadaJogar,casaDestinoID){
 
     var deslocV=(casaDestino.getBoundingClientRect().width-pecaAJogar.getBoundingClientRect().width)/2
 
-    var deslocH=(casaDestino.getBoundingClientRect().height-pecaAJogar.getBoundingClientRect().height)/2
+    var deslocH=(casaDestino.getBoundingClientRect().height-pecaAJogar.getBoundingClientRect().height*1.1)/2
 
     var posLeftFim=casaDestino.getBoundingClientRect().left+deslocV
     var posTopFim=casaDestino.getBoundingClientRect().top+deslocH
@@ -283,11 +278,11 @@ function moverPeca(idPecaClicadaJogar,casaDestinoID){
     statusTabuleiro[lin][col]=idPecaClicadaJogar
 
     pecaAJogar.setAttribute(atributoPecas,casaDestinoID)
-    casaOriginal.addEventListener('click',clicar)
-    casaDestino.removeEventListener('click',clicar)
+    casaOriginal.addEventListener('click',clickJogar)
+    casaDestino.removeEventListener('click',clickJogar)
 }
 
-function trocar_var(){
+function trocarVarCor(){
     var troca=cor2
     cor2=cor1
     cor1=troca            
@@ -305,3 +300,16 @@ function newPopup(){
     }
 }
 
+function iniciaMatrizTabuleiro(){
+    //X->posição não Jogável
+    //0 -Casa vazia
+    statusTabuleiro=[[NJ,JG,NJ,JG,NJ,JG,NJ,JG],
+                     [JG,NJ,JG,NJ,JG,NJ,JG,NJ],
+                     [NJ,JG,NJ,JG,NJ,JG,NJ,JG],
+                     [JG,NJ,JG,NJ,JG,NJ,JG,NJ],
+                     [NJ,JG,NJ,JG,NJ,JG,NJ,JG],
+                     [JG,NJ,JG,NJ,JG,NJ,JG,NJ],
+                     [NJ,JG,NJ,JG,NJ,JG,NJ,JG],
+                     [JG,NJ,JG,NJ,JG,NJ,JG,NJ]]
+
+}
